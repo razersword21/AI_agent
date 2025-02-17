@@ -3,16 +3,19 @@ logging.basicConfig(level=logging.INFO)
 import time
 import json
 import re
+import copy
 
 def chat_agent(model, tokenizer, user_input: str, history: list):
     logging.info(f"\nchat_agent 輸入:\n{user_input}\n歷史紀錄: {history}")
 
     history.append({"role": "user", "content": user_input})
+    system_history = copy.deepcopy(history)
+    system_history.insert(0, {"role": "system", "content": "所有回應都必須用繁體中文回答，且思考鍊的內容盡量精簡。"})
     
     start_time = time.time()
 
     text = tokenizer.apply_chat_template(
-        history,
+        system_history,
         tokenize=False,
         add_generation_prompt=True
     )
