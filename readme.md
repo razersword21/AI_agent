@@ -12,4 +12,20 @@
 
 ## 功能
 - 使用者輸入文字，AI回傳文字
-* 目前使用的AI模型為deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B 較擅長數學及程式推理相關問題
+- 目前使用的AI模型為deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B 較擅長數學及程式推理相關問題
+
+# Podman
+- build image
+    ```bash
+    podman build --pull=never -t testagent:latest . --log-level=debug
+    ```
+pull=never表示不會從docker hub下載image
+- run container
+    ```bash
+    podman run --rm -e MODEL_NAME=Qwen/Qwen3-0.6B -p 8080:8080 testagent:latest
+    ```
+
+## Test
+```bash
+ curl http://localhost:8080/razer_api/v1/ai_agent/test
+```

@@ -7,7 +7,7 @@ from typing import Any, Callable, Coroutine, Optional
 from typing_extensions import ParamSpec
 from fastapi.responses import JSONResponse
 
-from pydantic import BaseModel 
+from pydantic import BaseModel, Field
 
 
 class Chat_request(BaseModel):
@@ -20,6 +20,9 @@ class Chat_response(BaseModel):
 
 class HTTPErrorResult(BaseModel):
     result: int
+
+class HTTPSuccessResult(BaseModel):
+    message: str
 
 @dataclass
 class Errors:
